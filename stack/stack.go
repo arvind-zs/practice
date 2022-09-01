@@ -10,7 +10,13 @@ func New() Stack {
 }
 
 func (st *Stack) Push(ele int) {
-	st.S = append(st.S, ele)
+	if len(st.S) < 100 {
+		st.S = append(st.S, ele)
+	}
+}
+
+func (st *Stack) Len() int {
+	return len(st.S)
 }
 
 func (st *Stack) Pop() int {
