@@ -3,34 +3,39 @@ package queue
 import "practice/stack"
 
 type queue struct {
-	S1 []int
-	S2 []int
+	s1 stack.Stack
+	s2 stack.Stack
 }
 
-func New(s1, s2 []int) queue {
-	return queue{S1: s1, S2: s2}
+func New(s1, s2 stack.Stack) queue {
+	return queue{s1: s1, s2: s2}
 }
 
 func (q *queue) Push(ele int) {
-	stack.Push(ele, &q.S1)
+	if len(q.s1.S) == 0 && len(q.s2.S) == 0 {
+		q.s1 = stack.New()
+		q.s2 = stack.New()
+	}
+
+	q.s1.Push(ele)
 }
 
 func (q *queue) Pop() int {
-	if len(q.S2) == 0 {
+	if len(q.s2.S) == 0 {
 		q.pushOneStackToAnother()
 	}
 
 	//   popping from stack S2
-	lastElement := stack.Pop(&q.S2)
+	lastElement := q.s2.Pop()
 	return lastElement
 }
 
 func (q *queue) pushOneStackToAnother() {
-	for len(q.S1) > 0 {
+	for len(q.s1.S) > 0 {
 		// popping from stack s1
-		lastElement := stack.Pop(&q.S1)
+		lastElement := q.s1.Pop()
 
 		//  pushing into stack s2
-		stack.Push(lastElement, &q.S2)
+		q.s2.Push(lastElement)
 	}
 }

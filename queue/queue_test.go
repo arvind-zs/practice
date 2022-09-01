@@ -3,23 +3,25 @@ package queue
 import (
 	"reflect"
 	"testing"
+
+	"practice/stack"
 )
 
 func TestPush(t *testing.T) {
 	testcases := []struct {
 		desc   string
 		input  int
-		expRes []int
+		expRes stack.Stack
 	}{
-		{desc: "success:pushing element in queue", input: 1, expRes: []int{1}},
+		{desc: "success:pushing element in queue", input: 1, expRes: stack.Stack{S: []int{1}}},
 	}
 
 	for i, tc := range testcases {
-		q := New(nil, nil)
+		q := New(stack.Stack{}, stack.Stack{})
 		q.Push(tc.input)
 
-		if !reflect.DeepEqual(tc.expRes, q.S1) {
-			t.Errorf("testcases %d failed expected %v got %v", i+1, tc.expRes, q.S1)
+		if !reflect.DeepEqual(tc.expRes, q.s1) {
+			t.Errorf("testcases %d failed expected %v got %v", i+1, tc.expRes, q.s1)
 		}
 	}
 }
@@ -36,7 +38,7 @@ func TestPop(t *testing.T) {
 	}
 
 	for i, tc := range testcases {
-		q := New(tc.S1, tc.S2)
+		q := New(stack.Stack{S: tc.S1}, stack.Stack{S: tc.S2})
 		res := q.Pop()
 
 		if !reflect.DeepEqual(tc.expRes, res) {

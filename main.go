@@ -4,13 +4,14 @@ import (
 	"fmt"
 
 	"practice/queue"
+	"practice/stack"
 )
 
 func main() {
-	que := queue.New(nil, nil)
+	que := queue.New(stack.Stack{}, stack.Stack{})
 	que.Push(4)
 	que.Push(2)
-	fmt.Println(que.S1[len(que.S1)-1])
+	que.Push(6)
 	ele := que.Pop()
 	fmt.Println(ele)
 }
