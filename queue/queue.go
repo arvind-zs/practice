@@ -12,36 +12,25 @@ func New(s1, s2 []int) queue {
 }
 
 func (q *queue) Push(ele int) {
-	s := stack.New(q.S1)
-	s.Push(ele)
-	q.S1 = s.S1
+	stack.Push(ele, &q.S1)
 }
 
 func (q *queue) Pop() int {
 	if len(q.S2) == 0 {
-		q.pushOneStackToAnother(q.S1, q.S2)
+		q.pushOneStackToAnother()
 	}
 
 	//   popping from stack S2
-	s := stack.New(q.S2)
-	lastElement := s.Pop()
-	q.S2 = s.S1
+	lastElement := stack.Pop(&q.S2)
 	return lastElement
 }
 
-func (q *queue) pushOneStackToAnother(s1, s2 []int) {
-	for len(s1) > 0 {
+func (q *queue) pushOneStackToAnother() {
+	for len(q.S1) > 0 {
 		// popping from stack s1
-		s := stack.New(s1)
-		lastElement := s.Pop()
-		s1 = s.S1
+		lastElement := stack.Pop(&q.S1)
 
 		//  pushing into stack s2
-		s = stack.New(s2)
-		s.Push(lastElement)
-		s2 = s.S1
+		stack.Push(lastElement, &q.S2)
 	}
-
-	q.S1 = s1
-	q.S2 = s2
 }
