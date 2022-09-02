@@ -10,19 +10,12 @@ import (
 
 func main() {
 	que := queue.New(stack.Stack{}, stack.Stack{})
-	err := que.Push(4)
-	if err != nil {
-		log.Println(err.Error())
-	}
 
-	err = que.Push(2)
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	err = que.Push(6)
-	if err != nil {
-		log.Println(err.Error())
+	for i := 0; i < 101; i++ {
+		err := que.Push(4)
+		if err != nil {
+			log.Println(err.Error())
+		}
 	}
 
 	ele, err := que.Pop()

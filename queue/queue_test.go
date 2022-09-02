@@ -27,7 +27,7 @@ func TestPush(t *testing.T) {
 		}
 
 		err := q.Push(tc.input)
-		
+
 		if !reflect.DeepEqual(tc.expErr, err) {
 			t.Errorf("testcases %d failed expected %v got %v", i+1, tc.expErr, err)
 		}
