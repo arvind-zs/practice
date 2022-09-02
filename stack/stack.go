@@ -12,7 +12,7 @@ func New() Stack {
 }
 
 func (st *Stack) Push(ele int) error {
-	if len(st.S) < cap(st.S) {
+	if st.Len() < cap(st.S) {
 		st.S = append(st.S, ele)
 		return nil
 	}
@@ -30,5 +30,6 @@ func (st *Stack) Pop() (int, error) {
 		st.S = st.S[:len(st.S)-1]
 		return lastElement, nil
 	}
+
 	return -1, errors.New("stack is empty right now")
 }

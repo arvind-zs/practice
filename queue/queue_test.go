@@ -1,6 +1,7 @@
 package queue
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 
@@ -40,6 +41,9 @@ func TestPop(t *testing.T) {
 		expErr error
 	}{
 		{desc: "success:stack S2 is not empty", S1: []int{2, 3}, S2: []int{1}, expRes: 1, expErr: nil},
+		{desc: "success:stack S2 is  empty", S1: []int{2, 3}, S2: make([]int, 0, 100), expRes: 2, expErr: nil},
+		{desc: "failure:stack S2 capacity is  equal to its maximum capacity", S1: []int{2, 3}, S2: make([]int, 0, 0),
+			expRes: -1, expErr: errors.New("stack is empty right now")},
 	}
 
 	for i, tc := range testcases {

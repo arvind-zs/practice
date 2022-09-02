@@ -14,10 +14,16 @@ func TestPush(t *testing.T) {
 		expErr error
 	}{
 		{desc: "success:pushing element in stack", input: 1, expRes: []int{1}, expErr: nil},
+		{desc: "failure: stack capacity is equal to its maximum capacity", input: 5, expRes: []int{},
+			expErr: errors.New("you can not enter element  right now...stack capacity is equal to its maximum capacity")},
 	}
 
 	for i, tc := range testcases {
 		s := New()
+		if i == 1 {
+			s = Stack{S: make([]int, 0, 0)}
+		}
+
 		err := s.Push(tc.input)
 
 		if !reflect.DeepEqual(tc.expRes, s.S) {

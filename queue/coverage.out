@@ -1,0 +1,13 @@
+mode: set
+practice/queue/queue.go:14.36,16.2 1 1
+practice/queue/queue.go:18.37,19.40 1 1
+practice/queue/queue.go:24.2,24.23 1 1
+practice/queue/queue.go:19.40,22.3 2 1
+practice/queue/queue.go:27.36,28.21 1 1
+practice/queue/queue.go:33.2,33.19 1 1
+practice/queue/queue.go:28.21,30.3 1 1
+practice/queue/queue.go:36.41,37.21 1 1
+practice/queue/queue.go:37.21,40.17 2 1
+practice/queue/queue.go:47.3,48.17 2 1
+practice/queue/queue.go:40.17,44.4 2 0
+practice/queue/queue.go:48.17,52.4 2 1
