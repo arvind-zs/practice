@@ -36,15 +36,10 @@ func (q *queue) Pop() (int, error) {
 func (q *queue) pushOneStackToAnother() {
 	for q.s1.Len() > 0 {
 		// popping from stack s1
-		lastElement, err := q.s1.Pop()
-		if err != nil {
-			log.Println(err.Error())
-
-			return
-		}
+		lastElement, _ := q.s1.Pop()
 
 		//  pushing into stack s2
-		err = q.s2.Push(lastElement)
+		err := q.s2.Push(lastElement)
 		if err != nil {
 			log.Println(err.Error())
 

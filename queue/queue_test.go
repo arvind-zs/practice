@@ -16,16 +16,18 @@ func TestPush(t *testing.T) {
 		expErr error
 	}{
 		{desc: "success:pushing element in queue", input: 1, expRes: stack.Stack{S: []int{1}}, expErr: nil},
+		{desc: "failure:queue capacity is equal to its maximum capacity", input: 3, expRes: stack.Stack{},
+			expErr: errors.New("you can not enter element  right now...stack capacity is equal to its maximum capacity")},
 	}
 
 	for i, tc := range testcases {
 		q := New(stack.Stack{}, stack.Stack{})
-		err := q.Push(tc.input)
-
-		if !reflect.DeepEqual(tc.expRes, q.s1) {
-			t.Errorf("testcases %d failed expected %v got %v", i+1, tc.expRes, q.s1)
+		if i == 1 {
+			q = New(stack.Stack{S: make([]int, 0, 0)}, stack.Stack{S: []int{1}})
 		}
 
+		err := q.Push(tc.input)
+		
 		if !reflect.DeepEqual(tc.expErr, err) {
 			t.Errorf("testcases %d failed expected %v got %v", i+1, tc.expErr, err)
 		}
